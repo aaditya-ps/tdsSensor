@@ -5,7 +5,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-
 
 const app = initializeApp(appSettings) //constructed a variable app which passes argument appSettings i.e. my database to the imported function; and likes my project to the function imported
 
-import {getDatabase, ref, push, onValue, remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js" //imported another function
+import {getDatabase, ref, onValue, remove} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js" //imported another function
 
 const database = getDatabase(app) // set database to imported funtion getDatabase with argument of our project which allows us to fetch and push items in database
 
@@ -14,14 +14,16 @@ const valueInDb = ref(database, "tds-value") // assigned a variable to function 
 const para1 = document.getElementById("para1")
 
 onValue(valueInDb, function(snapshot){   //onValue is a Firebase fxn which allows to fetch data from server i.e. "snapshot"; we gave two arguments
-    //we give two arguments, first "taskInDb" to specify the database from where to read items, and other being a function with snapshots as arguments.
+                                         //we give two arguments, first "taskInDb" to specify the database from where to read items, and other being a function with snapshots as arguments.
     if (snapshot.exists()){  
-                    // We used to encounter an error while deleting the last element from the DB, so, Firebase recommends having 'snapshot.exists as TRUE'. This is why we added If condition.
+// We used to encounter an error while deleting the last element from the DB, so, Firebase recommends having 'snapshot.exists as TRUE'. This is why we added If condition.
         let obToAr = Object.values(snapshot.val())  //items are stored as object in firebase, to convert to array, we have 3 fxns:
            
             // Object.values( objectname )---->returns values of the object as array
           
             //note: "snaphot.val()" is important to be written as argument instead of "snapshot"
+
+            console.log(obToAr)
         
             para1.textContent = obToAr
     }
