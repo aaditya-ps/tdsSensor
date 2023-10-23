@@ -17,19 +17,12 @@ onValue(valueInDb, function(snapshot){   //onValue is a Firebase fxn which allow
                                          //we give two arguments, first "taskInDb" to specify the database from where to read items, and other being a function with snapshots as arguments.
     if (snapshot.exists()){  
 // We used to encounter an error while deleting the last element from the DB, so, Firebase recommends having 'snapshot.exists as TRUE'. This is why we added If condition.
-        let obToAr = Object.values(snapshot.val())  //items are stored as object in firebase, to convert to array, we have 3 fxns:
-           
-            // Object.values( objectname )---->returns values of the object as array
-          
-            //note: "snaphot.val()" is important to be written as argument instead of "snapshot"
-
-            console.log(obToAr)
         
-            para1.textContent = obToAr
+            para1.textContent = snapshot.val()
     }
 
     else{
-        para1.textContent = "No Value"
+        para1.innerHTML = ""
     }
 }
 )
